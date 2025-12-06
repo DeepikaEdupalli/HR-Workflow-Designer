@@ -13,7 +13,6 @@ The application is split into several logical layers:
 2. Canvas / Graph Engine (React Flow)
 
     Located in workflowCanvas.tsx 
-
         - workflowCanvas
         - Renders the workflow graph.
         - Supports:
@@ -26,7 +25,6 @@ The application is split into several logical layers:
 3. Node Types & Strong Typing (TypeScript)
 
     types.tsx defines all node structures and guarantees correctness.
-
         - types
         - start, task, approval, automated, end nodes
         - Each node has typed attributes (assignee, metadata, action params, etc.)
@@ -34,7 +32,6 @@ The application is split into several logical layers:
 4. Node Factory Utility
 
     createNode() in utility.tsx generates new nodes with defaults.
-
         - utility
         - Unique node IDs
         - Default positioning
@@ -43,7 +40,6 @@ The application is split into several logical layers:
 5. Mock API Layer
 
     mockapi.tsx simulates:
-
         - mockapi
         - /automations — returns mock automated actions
         - /simulate — executes workflow logic, validates graph, returns logs
@@ -52,7 +48,6 @@ The application is split into several logical layers:
 6. Workflow Editor UI
 
     The right panel (NodeFormPanel) lets users edit:
-
         - Titles
         - Assignees
         - Action parameters
@@ -91,7 +86,6 @@ npm start
 1. React Flow for Graph Engine
 
     React Flow was chosen because:
-
        -  Easy custom node rendering
        -  Stable drag-and-drop behavior
        -  Large ecosystem
@@ -100,7 +94,6 @@ npm start
 2. Fully Typed Node Data (TypeScript)
 
     Reasons: 
-
        - Every node type has its own schema. 
        - No runtime shape errors
        - Form fields adapt automatically
@@ -109,7 +102,6 @@ npm start
 3. Mock API Instead of Real Backend
 
     Reasons:
-
        - Fast to iterate
        - No server dependency
        - Easy for interview/project demo
@@ -118,7 +110,6 @@ npm start
 4. Simulation Engine is Deterministic
 
     Reasons: 
-
        - Traverses graph linearly
        - Allows branching but logs only first path
        - Works with all node types including automations
