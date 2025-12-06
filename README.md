@@ -6,85 +6,49 @@ Users can design HR workflows using drag-and-drop nodes, edit node configuration
 ## Architecture Overview
 
 The application is split into several logical layers:
-
 1. UI Layer (React + TailwindCSS)
-
-Provides layout: left toolbar, center canvas, right inspector panel.
-
-Responsive and styled using TailwindCSS.
+    - Provides layout: left toolbar, center canvas, right inspector panel.
+    - Responsive and styled using TailwindCSS.
 
 2. Canvas / Graph Engine (React Flow)
-
-Located in workflowCanvas.tsx 
-
-workflowCanvas
-
-Renders the workflow graph.
-
-Supports:
-
-Drag-and-drop node creation
-
-Node selection & editing
-
-Edge creation with custom rules (Start cannot have incoming; End cannot have outgoing)
-
-Fit-view, zooming, and panning
-
-Minimap, background grid
+    Located in workflowCanvas.tsx 
+        - workflowCanvas
+        - Renders the workflow graph.
+        - Supports:
+        - Drag-and-drop node creation
+        - Node selection & editing
+        - Edge creation with custom rules (Start cannot have incoming; End cannot have outgoing)
+        - Fit-view, zooming, and panning
+        - Minimap, background grid
 
 3. Node Types & Strong Typing (TypeScript)
-
-types.tsx defines all node structures and guarantees correctness.
-
-
-types
-
-start, task, approval, automated, end nodes
-
-Each node has typed attributes (assignee, metadata, action params, etc.)
+    types.tsx defines all node structures and guarantees correctness.
+        - types
+        - start, task, approval, automated, end nodes
+        - Each node has typed attributes (assignee, metadata, action params, etc.)
 
 4. Node Factory Utility
-
-createNode() in utility.tsx generates new nodes with defaults.
-
-
-utility
-
-Unique node IDs
-
-Default positioning
-
-Default values for every node type
+    createNode() in utility.tsx generates new nodes with defaults.
+        - utility
+        - Unique node IDs
+        - Default positioning
+        - Default values for every node type
 
 5. Mock API Layer
-
-mockapi.tsx simulates:
-
-
-mockapi
-
-/automations — returns mock automated actions
-
-/simulate — executes workflow logic, validates graph, returns logs
-
-Detects cycles, incomplete paths, and prints execution trace
+    mockapi.tsx simulates:
+        - mockapi
+        - /automations — returns mock automated actions
+        - /simulate — executes workflow logic, validates graph, returns logs
+        - Detects cycles, incomplete paths, and prints execution trace
 
 6. Workflow Editor UI
-
-The right panel (NodeFormPanel) lets users edit:
-
-Titles
-
-Assignees
-
-Action parameters
-
-Approval thresholds
-
-Metadata
-
-End node summary preferences
+    The right panel (NodeFormPanel) lets users edit:
+        - Titles
+        - Assignees
+        - Action parameters
+        - Approval thresholds
+        - Metadata
+        - End node summary preferences
 
 ## Getting Started
 
@@ -107,60 +71,42 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
 ## Build for Production
+
 ```bash
 npm run build
 npm start
 ```
 ## Design Decisions
+
 1. React Flow for Graph Engine
-
-React Flow was chosen because:
-
-Easy custom node rendering
-
-Stable drag-and-drop behavior
-
-Large ecosystem
-
-Supports panning/zooming/controls out of the box
+    React Flow was chosen because:
+       -  Easy custom node rendering
+       -  Stable drag-and-drop behavior
+       -  Large ecosystem
+       -  Supports panning/zooming/controls out of the box
 
 2. Fully Typed Node Data (TypeScript)
-
-Reasons: 
-
-Every node type has its own schema. 
-
-No runtime shape errors
-
-Form fields adapt automatically
-
-Safer simulation logic
+    Reasons: 
+       - Every node type has its own schema. 
+       - No runtime shape errors
+       - Form fields adapt automatically
+       - Safer simulation logic
 
 3. Mock API Instead of Real Backend
-
-Reasons:
-
-Fast to iterate
-
-No server dependency
-
-Easy for interview/project demo
-
-Backend can be added later without changing UI architecture.
+    Reasons:
+       - Fast to iterate
+       - No server dependency
+       - Easy for interview/project demo
+       - Backend can be added later without changing UI architecture.
 
 4. Simulation Engine is Deterministic
-
-Reasons: 
-
-Traverses graph linearly
-
-Allows branching but logs only first path
-
-Works with all node types including automations
+    Reasons: 
+       - Traverses graph linearly
+       - Allows branching but logs only first path
+       - Works with all node types including automations
 
 5. JSON Export / Import
-
-Enables sharing workflows or saving them locally without backend.
+    Enables sharing workflows or saving them locally without backend.
 
 ### What Has Been Completed
 
@@ -190,7 +136,7 @@ Enables sharing workflows or saving them locally without backend.
 
 13. Simulation prints automation actions + parameters
 
-### What I Would Add With More Time
+### TO DO
 
 1. Branch Handling (Decision Nodes) which supports Conditional edges, Multi-path execution and Rule engine
 
@@ -205,3 +151,4 @@ Enables sharing workflows or saving them locally without backend.
 6. Animate execution path on canvas.
 
 7. Mobile & Tablet Friendly UI
+
